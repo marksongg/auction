@@ -7,9 +7,11 @@ import { Component, ViewEncapsulation } from "@angular/core";
     encapsulation: ViewEncapsulation.None
 })
 export default class ApplicationComponent {
+    // TODO
     products: Array<string> = [];
 
     constructor(){
+        // TODO サービスをコールする
         this.products = ['Mark', 'Perter', 'Jessica' , 'Liu'];
     }
 }

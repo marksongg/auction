@@ -1,13 +1,25 @@
+<div class="container p-5 my-5 bg-primary text-white">
+    <h1>这是一个Angular轻量级框架 +  Bootstrap 开发出来的页面</h1>
+    <p>通过定义组件@Component、模块@NgModule和指令@Directive，构建在线拍卖应用程序。</p>
+ </div>
 <!-- 导航区域 -->
 <p>auction-navbar</p>
 
 <div class="container">
     <div class="row">
+        <!-- Left column contains only search form the style col-md-3 comes from
+            Twitter Bootstrap grid system
+        -->
         <div class="col-md-3">
             <!-- 左边查询区域 -->
             <p>auction-search</p>
         </div>
 
+        <!--
+            Right column which is the main area of the page contains two rows (as per Twitter Bootstrap):
+            1. First one keeps a carousel with featured products
+            2. Second one has a flexible grid with products.
+        -->
         <div class="col-md-9">
             <!-- 右边轮播和图片显示区域 -->
             <div class="row carousel-holder">
@@ -15,6 +27,7 @@
                     <p>auction-carousel</p>
                 </div>
             </div>
+            <!-- 产品grid表示区，使用 -->
             <div class="row">
                 <div *ngFor = "let prod of products" class="col-sm-4 col-lg-4 col-md-4">
                     <p>auction-product-item : {{prod}}</p>
