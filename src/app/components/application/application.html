@@ -1,0 +1,28 @@
+<!-- 导航区域 -->
+<p>auction-navbar</p>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-3">
+            <!-- 左边查询区域 -->
+            <p>auction-search</p>
+        </div>
+
+        <div class="col-md-9">
+            <!-- 右边轮播和图片显示区域 -->
+            <div class="row carousel-holder">
+                <div class="col-md-12">
+                    <p>auction-carousel</p>
+                </div>
+            </div>
+            <div class="row">
+                <div *ngFor = "let prod of products" class="col-sm-4 col-lg-4 col-md-4">
+                    <p>auction-product-item : {{prod}}</p>
+                  </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<p>auction-footer</p>
+
