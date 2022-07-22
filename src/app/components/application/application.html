@@ -32,12 +32,21 @@
             <!-- 产品grid表示区，使用 -->
             <div class="row">
                 <div *ngFor = "let prod of products" class="col-sm-4 col-lg-4 col-md-4">
-                    <auction-product-item [product]="prod" [img]="prod.img" [rating]="prod.rating"></auction-product-item>
-                  </div>
+                    <div class="auction-product-item">
+                        <auction-product-item [product]="prod" [img]="prod.img" [rating]="prod.rating"></auction-product-item>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
 </div>
 
 <auction-footer></auction-footer>
+
+<style>
+    .auction-product-item:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 4px 17px rgba(0, 0, 0, 0.35);
+    }
+  </style>
 
