@@ -8,5 +8,5 @@
         <h4 *ngIf="product"><a>{{product.title}}</a></h4>
         <p *ngIf="product">{{product.description}}</p>
     </div>
-    <div>auction-stars</div>
+    <auction-stars [rating]="rating"></auction-stars>
 </div>

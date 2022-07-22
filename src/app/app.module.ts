@@ -10,7 +10,9 @@ import FooterComponent from './components/footer/footer';
 import SearchComponent from './components/search/search';
 import CarouselComponent from './components/carousel/carousel';
 import ProductItemComponent from './components/product-item/product-item';
+import StarsComponent from './components/stars/stars';
 import { ProductService } from './services/product-service';
+
 
 @NgModule({
   declarations: [
@@ -20,7 +22,8 @@ import { ProductService } from './services/product-service';
     FooterComponent,
     SearchComponent,
     CarouselComponent,
-    ProductItemComponent
+    ProductItemComponent,
+    StarsComponent
   ],
   imports: [
     BrowserModule,
@@ -30,11 +33,6 @@ import { ProductService } from './services/product-service';
   bootstrap: [
     AppComponent, 
     ApplicationComponent, // ★重要，这里必须要追加，否则*ngfor等命令不可以使用
-    NavbarComponent,
-    FooterComponent,
-    SearchComponent,
-    CarouselComponent,
-    ProductItemComponent
   ]
 })
 export class AppModule { }

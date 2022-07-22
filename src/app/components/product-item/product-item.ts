@@ -8,6 +8,7 @@ import { Product, ProductService } from "../../services/product-service";
 export default class ProductItemComponent {
     @Input() product: Product | undefined;
     @Input() img: string | undefined;
+    @Input() rating: number | undefined;
 
     constructor(productService: ProductService){
         // 可能不是最好的办法
@@ -15,6 +16,7 @@ export default class ProductItemComponent {
         if(products){
             this.product = products[0];
             this.img = products[0].img;
+            this.rating = products[0].rating;
         }
     }
   }
