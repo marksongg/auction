@@ -1,5 +1,5 @@
 <div class="thumbnail">
-    <img src="assets/img/320x150.png">
+    <img [src]="img">
     <div class="caption">
         <!-- 判断对像是否存在使用[*ngIf] -->
         <h4 class="pull-right" *ngIf="product">{{product.price}}</h4>

@@ -32,7 +32,7 @@
             <!-- 产品grid表示区，使用 -->
             <div class="row">
                 <div *ngFor = "let prod of products" class="col-sm-4 col-lg-4 col-md-4">
-                    <auction-product-item [product]="prod"></auction-product-item>
+                    <auction-product-item [product]="prod" [img]="prod.img"></auction-product-item>
                   </div>
             </div>
         </div>

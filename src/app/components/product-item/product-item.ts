@@ -7,12 +7,14 @@ import { Product, ProductService } from "../../services/product-service";
 })
 export default class ProductItemComponent {
     @Input() product: Product | undefined;
+    @Input() img: string | undefined;
 
     constructor(productService: ProductService){
         // 可能不是最好的办法
         let products = productService.getProducts();
         if(products){
             this.product = products[0];
+            this.img = products[0].img;
         }
     }
   }
