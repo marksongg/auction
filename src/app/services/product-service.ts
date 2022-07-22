@@ -56,10 +56,10 @@ var products = [
     },
     {
         "id": 5,
-        "title": "カップ&ソーサー SAKURA セット",
+        "title": "カップ&ソーサー セット",
         "price": 299,
         "rating": 5,
-        "description": "若き陶芸家、青木良太さん作.",
+        "description": "若き陶芸家、青木良太さん作SAKURAティーセット。",
         "categories": ["electronics", "hardware"],
         "img": 'assets/img/prod5.jpg'
     }

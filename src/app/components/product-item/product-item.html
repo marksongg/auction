@@ -2,7 +2,9 @@
     <img [src]="img">
     <div class="caption">
         <!-- 判断对像是否存在使用[*ngIf] -->
-        <h4 class="pull-right" *ngIf="product">{{product.price}}</h4>
+        <!-- 日元 currency codes of Angular Currency Pipes-->
+        <!-- https://www.angularjswiki.com/angular/angular-currency-pipe-formatting-currency-in-angular/ -->
+        <h4 class="pull-right" *ngIf="product">{{product.price | currency:"JPY":"symbol"}}</h4>
         <h4 *ngIf="product"><a>{{product.title}}</a></h4>
         <p *ngIf="product">{{product.description}}</p>
     </div>
