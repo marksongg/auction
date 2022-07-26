@@ -11,6 +11,8 @@ import SearchComponent from './components/search/search';
 import CarouselComponent from './components/carousel/carousel';
 import ProductItemComponent from './components/product-item/product-item';
 import StarsComponent from './components/stars/stars';
+import HomeComponent from './components/home/home';
+import ProductDetailComponent from './components/product-detail/product-detail';
 import { ProductService } from './services/product-service';
 
 
@@ -23,7 +25,9 @@ import { ProductService } from './services/product-service';
     SearchComponent,
     CarouselComponent,
     ProductItemComponent,
-    StarsComponent
+    StarsComponent,
+    HomeComponent,
+    ProductDetailComponent
   ],
   imports: [
     BrowserModule,
