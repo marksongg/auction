@@ -7,6 +7,9 @@
           <p class="card-text" *ngIf="product">
             <span><auction-stars [rating]="product.rating"></auction-stars></span>
           </p>
+          <p class="card-text" *ngIf="reviews">
+            Last Updated Date: {{reviews[reviews.length -1].timestamp | date: 'medium'}}
+          </p>
           <p>
             <small class="text-muted">{{reviews.length}} reviews</small><a href="" class="btn btn-primary">戻る</a>
           </p>
@@ -23,7 +26,8 @@
     <div class="col-md-12">
       <auction-stars [rating]="review.rating"></auction-stars>
       <span>{{review.user}}</span>
-      <span class="pull-right">{{review.timestamp}}</span>
+      <!-- 时间过滤器| -->
+      <span class="pull-right">{{review.timestamp | date: 'medium'}}</span>
       <p>{{review.comment}}</p>
     </div>
   </div>

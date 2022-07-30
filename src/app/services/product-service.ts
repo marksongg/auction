@@ -14,7 +14,7 @@ export class Review {
     constructor(
         public id: number,
         public productId: number,
-        public timestamp: string,
+        public timestamp: Date,
         public user: string,
         public rating: number,
         public comment: string){
@@ -40,7 +40,7 @@ export class ProductService {
     // 根据商品ID取得相应的Reviews情报数组
     getReviewsForProduct(productId: number): Review[] | any {
         return reviews.filter(r => r.productId == productId)
-        .map(r => new Review(r.id, r.productId, r.timestamp, r.user, r.rating, r.comment));
+        .map(r => new Review(r.id, r.productId, new Date(r.timestamp), r.user, r.rating, r.comment));
     }
 }
 
@@ -97,7 +97,7 @@ var reviews = [
       "id": 0,
       "productId": 1,
       "timestamp": "2014-05-20T02:17:00+00:00",
-      "user": "User 1",
+      "user": "沈腾",
       "rating": 5,
       "comment": "Aenean vestibulum velit id placerat posuere. Praesent placerat mi ut massa tempor, sed rutrum metus rutrum. Fusce lacinia blandit ligula eu cursus. Proin in lobortis mi. Praesent pellentesque auctor dictum. Nunc volutpat id nibh quis malesuada. Curabitur tincidunt luctus leo, quis condimentum mi aliquet eu. Vivamus eros metus, convallis eget rutrum nec, ultrices quis mauris. Praesent non lectus nec dui venenatis pretium."
     },
@@ -105,7 +105,7 @@ var reviews = [
       "id": 1,
       "productId": 1,
       "timestamp": "2014-05-20T02:53:00+00:00",
-      "user": "User 2",
+      "user": "贾玲",
       "rating": 3,
       "comment": "Aenean vestibulum velit id placerat posuere. Praesent placerat mi ut massa tempor, sed rutrum metus rutrum. Fusce lacinia blandit ligula eu cursus. Proin in lobortis mi. Praesent pellentesque auctor dictum. Nunc volutpat id nibh quis malesuada. Curabitur tincidunt luctus leo, quis condimentum mi aliquet eu. Vivamus eros metus, convallis eget rutrum nec, ultrices quis mauris. Praesent non lectus nec dui venenatis pretium."
     },
@@ -113,7 +113,7 @@ var reviews = [
       "id": 2,
       "productId": 1,
       "timestamp": "2014-05-20T05:26:00+00:00",
-      "user": "User 3",
+      "user": "关晓彤",
       "rating": 4,
       "comment": "Aenean vestibulum velit id placerat posuere. Praesent placerat mi ut massa tempor, sed rutrum metus rutrum. Fusce lacinia blandit ligula eu cursus. Proin in lobortis mi. Praesent pellentesque auctor dictum. Nunc volutpat id nibh quis malesuada. Curabitur tincidunt luctus leo, quis condimentum mi aliquet eu. Vivamus eros metus, convallis eget rutrum nec, ultrices quis mauris. Praesent non lectus nec dui venenatis pretium."
     },
@@ -121,7 +121,7 @@ var reviews = [
       "id": 3,
       "productId": 1,
       "timestamp": "2014-05-20T07:20:00+00:00",
-      "user": "User 4",
+      "user": "花花",
       "rating": 4,
       "comment": "Aenean vestibulum velit id placerat posuere. Praesent placerat mi ut massa tempor, sed rutrum metus rutrum. Fusce lacinia blandit ligula eu cursus. Proin in lobortis mi. Praesent pellentesque auctor dictum. Nunc volutpat id nibh quis malesuada. Curabitur tincidunt luctus leo, quis condimentum mi aliquet eu. Vivamus eros metus, convallis eget rutrum nec, ultrices quis mauris. Praesent non lectus nec dui venenatis pretium."
     },
@@ -129,7 +129,7 @@ var reviews = [
       "id": 4,
       "productId": 1,
       "timestamp": "2014-05-20T11:35:00+00:00",
-      "user": "User 5",
+      "user": "宋亚轩",
       "rating": 5,
       "comment": "Aenean vestibulum velit id placerat posuere. Praesent placerat mi ut massa tempor, sed rutrum metus rutrum. Fusce lacinia blandit ligula eu cursus. Proin in lobortis mi. Praesent pellentesque auctor dictum. Nunc volutpat id nibh quis malesuada. Curabitur tincidunt luctus leo, quis condimentum mi aliquet eu. Vivamus eros metus, convallis eget rutrum nec, ultrices quis mauris. Praesent non lectus nec dui venenatis pretium."
     },
@@ -137,8 +137,16 @@ var reviews = [
       "id": 5,
       "productId": 1,
       "timestamp": "2014-05-20T11:42:00+00:00",
-      "user": "User 6",
+      "user": "宋刚",
       "rating": 5,
       "comment": "Aenean vestibulum velit id placerat posuere. Praesent placerat mi ut massa tempor, sed rutrum metus rutrum. Fusce lacinia blandit ligula eu cursus. Proin in lobortis mi. Praesent pellentesque auctor dictum. Nunc volutpat id nibh quis malesuada. Curabitur tincidunt luctus leo, quis condimentum mi aliquet eu. Vivamus eros metus, convallis eget rutrum nec, ultrices quis mauris. Praesent non lectus nec dui venenatis pretium."
-    }
+    },
+    {
+        "id": 0,
+        "productId": 2,
+        "timestamp": "2014-05-20T11:42:00+00:00",
+        "user": "乐宸",
+        "rating": 0,
+        "comment": "Aenean vestibulum velit id placerat posuere. Praesent placerat mi ut massa tempor, sed rutrum metus rutrum. Fusce lacinia blandit ligula eu cursus. Proin in lobortis mi. Praesent pellentesque auctor dictum. Nunc volutpat id nibh quis malesuada. Curabitur tincidunt luctus leo, quis condimentum mi aliquet eu. Vivamus eros metus, convallis eget rutrum nec, ultrices quis mauris. Praesent non lectus nec dui venenatis pretium."
+      }
   ];
