@@ -14,6 +14,8 @@ export default class StarsComponent implements OnInit {
         for(let i = 1; i <=this.count; i++) {
             if(this.rating){
                 this.stars.push(i > this.rating);
+            } else {
+                this.stars.push(true);
             }
         }
     }
