@@ -5,7 +5,8 @@
         <!-- 日元 currency codes of Angular Currency Pipes-->
         <!-- https://www.angularjswiki.com/angular/angular-currency-pipe-formatting-currency-in-angular/ -->
         <h4 class="pull-right" *ngIf="product">{{product.price | currency:"JPY":"symbol"}}</h4>
-        <h4 *ngIf="product"><a [routerLink]="['/products', product.title, img, product.description]">{{product.title}}</a></h4>
+        <!-- 传递productId主键 -->
+        <h4 *ngIf="product"><a [routerLink]="['/products', product.id]">{{product.title}}</a></h4>
         <p *ngIf="product">{{product.description}}</p>
     </div>
     <auction-stars [rating]="rating"></auction-stars>
