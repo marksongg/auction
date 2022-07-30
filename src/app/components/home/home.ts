@@ -3,7 +3,7 @@ import {Product, ProductService} from '../../services/product-service'
 
 @Component({
     selector: 'auction-home-page',
-    styles: ['./home.css'],
+    styleUrls: ['./home.css'],
     template: `
         <div class="row carousel-holder">
             <div class="col-md-12">
