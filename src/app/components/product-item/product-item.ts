@@ -8,7 +8,7 @@ import { Product, ProductService } from "../../services/product-service";
 export default class ProductItemComponent {
     @Input() product: Product | undefined;
     @Input() img: string | undefined;
-    @Input() rating: number | undefined;
+    @Input() rating: number = 0;
 
     constructor(productService: ProductService){
         // 可能不是最好的办法
