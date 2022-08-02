@@ -14,6 +14,8 @@ import StarsComponent from './components/stars/stars';
 import HomeComponent from './components/home/home';
 import ProductDetailComponent from './components/product-detail/product-detail';
 import { ProductService } from './services/product-service';
+import { FilterPipe } from './components/pipes/filter-pipe';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -27,11 +29,14 @@ import { ProductService } from './services/product-service';
     ProductItemComponent,
     StarsComponent,
     HomeComponent,
-    ProductDetailComponent
+    ProductDetailComponent,
+    FilterPipe // ★重要，导入商品过滤管道Pipe
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    // ★重要，要导入ReactiveFormsModule，不然FormContrl类不识别
+    ReactiveFormsModule
   ],
   providers: [ProductService],
   bootstrap: [
