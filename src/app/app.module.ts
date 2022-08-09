@@ -16,6 +16,7 @@ import ProductDetailComponent from './components/product-detail/product-detail';
 import { ProductService } from './services/product-service';
 import { FilterPipe } from './components/pipes/filter-pipe';
 import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -35,6 +36,8 @@ import { ReactiveFormsModule } from '@angular/forms';
   imports: [
     BrowserModule,
     AppRoutingModule,
+    // ★重要，一定要引入FormModule，不然[(ngModel)]属性不识别
+    FormsModule,
     // ★重要，要导入ReactiveFormsModule，不然FormContrl类不识别
     ReactiveFormsModule
   ],

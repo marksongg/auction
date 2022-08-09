@@ -1,5 +1,9 @@
 <p>
-    <span *ngFor="let star of stars" class="starrating glyphicon glyphicon-star" [class.glyphicon-star-empty]="star">
+    <span *ngFor="let star of stars; let i = index" 
+      class="starrating glyphicon glyphicon-star" 
+      [class.glyphicon-star-empty]="!star"
+      (click)="fillStarsWithColor(i)">
     </span>
-    <span>{{rating}} 星</span>
+    <!-- 加上了数字管道，小数点后1位 -->
+    <span>{{rating | number:'.0-1'}} 星</span>
 </p>

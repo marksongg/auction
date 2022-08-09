@@ -6,3 +6,10 @@
 .pull-right {
     float: right;
 }
+
+/* 解决textarea宽度自动调节的问题 */
+.textarea-inherit {
+    width: 100%;
+    overflow: auto;
+    word-break: break-all; /* 解决兼容性问题 */
+}
