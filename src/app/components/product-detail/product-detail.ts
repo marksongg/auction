@@ -27,8 +27,9 @@ export default class ProductDetailComponent{
 
     addReview(){
         // 最新的评价对象新规作成
-         // 现实业务中，最新的评价需要登录到DB中
-        let review = new Review(0, this.productId, new Date(), 'Anonymous', this.newRating, this.newComment);
+        // 现实业务中，最新的评价需要登录到DB中
+        let tempComment: string = this.newComment? this.newComment: "未评论！";
+        let review = new Review(0, this.productId, new Date(), 'Anonymous', this.newRating, tempComment);
 
         // 在原有的数组最末端，加入这条消息
         this.reviews = [...this.reviews, review];
