@@ -4,22 +4,51 @@
     box-shadow: 0 4px 17px rgba(0, 0, 0, 0.35);
   }
 </style>
+<!-- novalidate: 禁止原生浏览器上表单验证 -->
+<form [formGroup]="formModel" (ngSubmit)="onSearch()">
+  <br/>
+  <!-- TODO: class.has-error not work 2022/08/11 -->
+  <div class="form-group" [class.has-error]="formModel.hasError('minlength', 'title')">
+    <label for="title">Product title:</label>
+    <input id="title"
+           placeholder="Title"
+           class="form-control"
+           type="text"
+           formControlName="title"
+           minlength="3">
+    <span class="help-block"
+          [hidden]="!formModel.hasError('minlength', 'title')">
+      Type at least 3 characters
+    </span>
+  </div>
 
-<form name="searchForm" role="form">
   <br/>
-  <div class="form-group">
-    <label for="productTitle">名称:</label>
-    <input type="text" id="productTitle" placeholder="" class="form-control">
+  <!-- TODO: class.has-error not work 2022/08/11 -->
+  <div class="form-group" [class.has-error]="formModel.hasError('positivenumber', 'price')">
+  <label for="price">Product price:</label>
+  <input id="price"
+        placeholder="Price"
+        class="form-control"
+        type="number"
+        step="any"
+        min="0"
+        formControlName="price">
+  <span class="help-block"
+      [hidden]="!formModel.hasError('positivenumber', 'price')">
+  Price is not a positive number
+  </span>
   </div>
+
   <br/>
   <div class="form-group">
-    <label for="productPrice">価格:</label>
-    <input type="number" id="productPrice" min="0" step="any" placeholder="" class="form-control">
-  </div>
-  <br/>
-  <div class="form-group">
-    <label for="productCategory">種類:</label>
-    <input id="productCategory" class="form-control">
+    <label for="category">Product category:</label>
+    <select id="category"
+            class="form-control"
+            formControlName="category">
+      <option value="-1">All categories</option>
+      <option *ngFor="let c of categories"
+              [value]="c">{{c}}</option>
+    </select>
   </div>
   <br/>
   <div class="form-group">

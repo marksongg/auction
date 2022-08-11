@@ -42,6 +42,11 @@ export class ProductService {
         return reviews.filter(r => r.productId == productId)
         .map(r => new Review(r.id, r.productId, new Date(r.timestamp), r.user, r.rating, r.comment));
     }
+
+    // すべて種類情報を取得する
+    getAllCategories(): string[] {
+        return ['Books', 'Electronics', 'Hardware'];
+    }
 }
 
 var products = [
