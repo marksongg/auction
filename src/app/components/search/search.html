@@ -15,7 +15,7 @@
            type="text"
            formControlName="title"
            minlength="3">
-    <!-- 重要: help-block not work。所以在search.css文件中，重新写了一个help-block式样 -->
+    <!-- 重要: 重新写了一个help-block式样，如果出错变红 -->
     <span class="help-block"
           [hidden]="!formModel.hasError('minlength', 'title')">
       Type at least 3 characters
