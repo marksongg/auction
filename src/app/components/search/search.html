@@ -5,9 +5,8 @@
   }
 </style>
 <!-- novalidate: 禁止原生浏览器上表单验证 -->
-<form [formGroup]="formModel" (ngSubmit)="onSearch()">
+<form [formGroup]="formModel" (ngSubmit)="onSearch()" novalidate>
   <br/>
-  <!-- TODO: class.has-error not work 2022/08/11 -->
   <div class="form-group" [class.has-error]="formModel.hasError('minlength', 'title')">
     <label for="title">Product title:</label>
     <input id="title"
@@ -16,6 +15,7 @@
            type="text"
            formControlName="title"
            minlength="3">
+    <!-- 重要: help-block not work。所以在search.css文件中，重新写了一个help-block式样 -->
     <span class="help-block"
           [hidden]="!formModel.hasError('minlength', 'title')">
       Type at least 3 characters
@@ -23,7 +23,6 @@
   </div>
 
   <br/>
-  <!-- TODO: class.has-error not work 2022/08/11 -->
   <div class="form-group" [class.has-error]="formModel.hasError('positivenumber', 'price')">
   <label for="price">Product price:</label>
   <input id="price"

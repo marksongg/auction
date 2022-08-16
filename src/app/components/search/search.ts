@@ -5,6 +5,7 @@ import {FormControl, FormGroup, FormBuilder, Validators} from '@angular/forms';
 
 @Component({
     selector: 'auction-search',
+    styleUrls: ['./search.css'],
     templateUrl: './search.html'
 })
 export default class SearchComponent{
