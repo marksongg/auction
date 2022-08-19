@@ -2,6 +2,7 @@ import { Component } from "@angular/core";
 import {Product, ProductService} from '../../services/product-service'
 import { FormControl } from "@angular/forms";
 import { debounceTime } from "rxjs/operators";
+import * as $ from "jquery";
 
 @Component({
     selector: 'auction-home-page',
@@ -27,6 +28,31 @@ import { debounceTime } from "rxjs/operators";
                 </div>
             </div>
         </div>
+
+        <!-- 模态框 -->
+        <div class="modal" id="myModal">
+          <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+         
+              <!-- 模态框头部 -->
+              <div class="modal-header">
+                <h4 class="modal-title">提示信息</h4>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+              </div>
+         
+              <!-- 模态框内容 -->
+              <div class="modal-body">
+                没有查询到数据，请重新查询!
+              </div>
+         
+              <!-- 模态框底部 -->
+              <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal" (click)="closeModal()" >关闭</button>
+              </div>
+         
+            </div>
+          </div>
+        </div>
     `
 })
 export default class HomeComponent {
@@ -51,9 +77,24 @@ export default class HomeComponent {
           this.productService.search(params).subscribe(data => {
             if(data){
               this.products = data;
-            }
+
+              if(this.products.length === 0){
+                // 模态画面的右上角的×,不表示
+                $(".btn-close").hide();
+                // 模态画面表示
+                $("#myModal").show();
+              }
+            } 
           });
         });
 
+        
+
+    }
+
+    // 关闭模态画面
+    closeModal(){
+      // 模态画面隐藏起来
+      $("#myModal").hide();
     }
 }

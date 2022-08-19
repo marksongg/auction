@@ -36,4 +36,10 @@
         "start": "ng serve --proxy-config proxy.conf.json",
         ......
       }
+# 2022/08/19 在angular cli 如何使用jquery
+  ・npm install --save jquery
+  ・npm install @types/jquery --save
+  ・在ts文件中引入：import * as $ from "jquery";
+  ・测试看是否成功：$('body').addClass('aaa');
+  
   
