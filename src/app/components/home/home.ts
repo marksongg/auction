@@ -45,5 +45,15 @@ export default class HomeComponent {
             // complete: () => console.info('complete')
           }
         );
+
+        // 增加一个订阅
+        this.productService.searchEvent.subscribe(params => {
+          this.productService.search(params).subscribe(data => {
+            if(data){
+              this.products = data;
+            }
+          });
+        });
+
     }
 }

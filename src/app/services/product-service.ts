@@ -1,5 +1,6 @@
 import { EventEmitter, Injectable } from "@angular/core";
 import { HttpClient, HttpParams } from '@angular/common/http';
+import { Observable } from "rxjs";
 
 export class Product {
     constructor(
@@ -42,7 +43,7 @@ export class ProductService {
     }
 
     // 通过HTTP访问
-    search(params: ProductSearchParams){
+    search(params: ProductSearchParams): Observable<Product[]>{
         // HttpParams对象设置查询条件使用
         let httpParams = new HttpParams();
         // Begin assigning parameters
@@ -63,8 +64,7 @@ export class ProductService {
         // 商品种类
         httpParams = httpParams.append('category', params.category);
 
-
-        return this.httpClient.get('/products', {params: httpParams});
+        return this.httpClient.get<Product[]>('/products', {params: httpParams});
     }
 
     // 生成商品对象数组

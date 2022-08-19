@@ -30,14 +30,12 @@ export default class SearchComponent{
     }
 
     onSearch(){
-        console.log("title: " + this.formModel.hasError('minlength', 'title'));
-        console.log("price:" + this.formModel.hasError('positivenumber', 'price'));
-        // console.log(this.formModel.value);
+        // console.log("title: " + this.formModel.hasError('minlength', 'title'));
+        // console.log("price:" + this.formModel.hasError('positivenumber', 'price'));
         // 验证通过时，才进行查询
         if(this.formModel.valid){
-            this.productService.search(this.formModel.value).subscribe(response => {
-                console.log(response);
-            });
+            // console.log(this.formModel.value);
+            this.productService.searchEvent.emit(this.formModel.value);
         }
         
     }
