@@ -1,3 +1,6 @@
+import { EventEmitter, Injectable } from "@angular/core";
+import { HttpClient, HttpParams } from '@angular/common/http';
+
 export class Product {
     constructor(
         public id: number,
@@ -22,7 +25,48 @@ export class Review {
     }
 }
 
+// 注意，这里是使用了interface来定义了查询条件
+export interface ProductSearchParams {
+  title: string;
+  price: number;
+  category: string;
+}
+
+// 重要：如果引入了HttpClient，这个@Injectable()一定要引入进来
+@Injectable()
 export class ProductService {
+    searchEvent: EventEmitter<any> = new EventEmitter();
+
+    constructor(private httpClient: HttpClient){
+
+    }
+
+    // 通过HTTP访问
+    search(params: ProductSearchParams){
+        // HttpParams对象设置查询条件使用
+        let httpParams = new HttpParams();
+        // Begin assigning parameters
+        // 商品标题
+        let tempTitle: string = ""
+        if(params.title) {
+          tempTitle = params.title;
+        };
+        httpParams = httpParams.append('title', tempTitle);
+        
+        // 商品价格
+        let tempPrice: number = 0;
+        if(params.price){
+          tempPrice = params.price;
+        }
+        httpParams = httpParams.append('price', tempPrice);
+
+        // 商品种类
+        httpParams = httpParams.append('category', params.category);
+
+
+        return this.httpClient.get('/products', {params: httpParams});
+    }
+
     // 生成商品对象数组
     getProducts(): Array<Product> {
         let tempProducts: Array<Product> = products.map(p => new Product(p.id, p.title, p.price, p.rating, p.description, p.categories, p.img));
@@ -48,6 +92,18 @@ export class ProductService {
         return ['Books', 'Electronics', 'Hardware'];
     }
 }
+
+/**
+ * Encodes the object into a valid query string.
+ */
+ function encodeParams(params: any): URLSearchParams {
+    return Object.keys(params)
+      .filter(key => params[key])
+      .reduce((accum: URLSearchParams, key: string) => {
+        accum.append(key, params[key]);
+        return accum;
+      }, new URLSearchParams());
+  }
 
 var products = [
     {

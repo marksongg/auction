@@ -20,7 +20,9 @@ export default class SearchComponent{
 
         const fb = new FormBuilder();
         this.formModel = fb.group({
+        // 增加最小长度check
           'title': [null, Validators.minLength(3)],
+           //   大于0的check追加
           'price': [null, positiveNumberValidator],
            // 默认选第一条数据  
           'category': [-1]
@@ -31,6 +33,13 @@ export default class SearchComponent{
         console.log("title: " + this.formModel.hasError('minlength', 'title'));
         console.log("price:" + this.formModel.hasError('positivenumber', 'price'));
         // console.log(this.formModel.value);
+        // 验证通过时，才进行查询
+        if(this.formModel.valid){
+            this.productService.search(this.formModel.value).subscribe(response => {
+                console.log(response);
+            });
+        }
+        
     }
 }
 
