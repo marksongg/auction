@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+    </head>
+    <body>
+        <span id="messageGoesHere"></span>
+
+        <script type="text/javascript">
+            // 建立socket连接，此时，服务器将协议从HTTP升级到WebSocket协议
+            var ws = new WebSocket("ws://localhost:8085");
+            // 当消息从socket到达时，将其内容显示在<span>元素中
+            ws.onmessage = function(event) {
+                var mySpan = document.getElementById("messageGoesHere");
+                mySpan.innerHTML = event.data;
+            }
+
+            ws.onerror = function(event) {
+                console.log("Error : " + event);
+            }
+        </script>
+    </body>
+</html>

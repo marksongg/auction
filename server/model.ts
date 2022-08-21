@@ -30,6 +30,11 @@ export function getProducts(params = <any>{}): Product[] {
     return result;
 }
 
+// (HttpClient.get请求)根据查询条件查询商品信息
+export function getAllProducts(): Product[] {
+    return products;
+}
+
 var products = [
     {
         "id": 1,

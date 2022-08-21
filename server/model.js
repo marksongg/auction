@@ -1,6 +1,6 @@
 "use strict";
 exports.__esModule = true;
-exports.getProducts = exports.Product = void 0;
+exports.getAllProducts = exports.getProducts = exports.Product = void 0;
 var Product = /** @class */ (function () {
     function Product(id, title, price, rating, description, categories, img) {
         this.id = id;
@@ -33,6 +33,11 @@ function getProducts(params) {
     return result;
 }
 exports.getProducts = getProducts;
+// (HttpClient.get请求)根据查询条件查询商品信息
+function getAllProducts() {
+    return products;
+}
+exports.getAllProducts = getAllProducts;
 var products = [
     {
         "id": 1,

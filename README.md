@@ -41,5 +41,9 @@
   ・npm install @types/jquery --save
   ・在ts文件中引入：import * as $ from "jquery";
   ・测试看是否成功：$('body').addClass('aaa');
+
+# 2022/08/21 在angular cli 中安装WebSocket, 原先想使用6666端口，但是发现被占用了，所以现在WebSocket使用了8086端口
+  ・npm install ws --save
+  ・npm install @types/ws --save-dev
   
   
