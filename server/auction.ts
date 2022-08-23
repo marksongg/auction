@@ -13,7 +13,7 @@ const app = express();
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 // 1：根据查询条件，取得商品
-app.get('/products', (req, res) => 
+app.get('/api/products', (req, res) => 
   {
     // L打印query查询条件
     console.log("req.query : " + JSON.stringify(req.query));
@@ -24,7 +24,7 @@ app.get('/products', (req, res) =>
 
 // 根据ID，查询商品
 // 2022/08/23 重要，不要忘了加上[/]，不然找不到服务
-app.get('/productbyid', (req, res) => {
+app.get('/api/productbyid', (req, res) => {
    console.log("productbyid" + JSON.stringify(req.query));
    res.json(getProductById(req.query));
 });

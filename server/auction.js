@@ -17,7 +17,7 @@ var ws_1 = require("ws");
 var app = express();
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 // 1：根据查询条件，取得商品
-app.get('/products', function (req, res) {
+app.get('/api/products', function (req, res) {
     // L打印query查询条件
     console.log("req.query : " + JSON.stringify(req.query));
     // 重要：这里固定返回的是JSON格式的对象 
@@ -25,7 +25,7 @@ app.get('/products', function (req, res) {
 });
 // 根据ID，查询商品
 // 2022/08/23 重要，不要忘了加上[/]，不然找不到服务
-app.get('/productbyid', function (req, res) {
+app.get('/api/productbyid', function (req, res) {
     console.log("productbyid" + JSON.stringify(req.query));
     res.json((0, model_1.getProductById)(req.query));
 });

@@ -76,7 +76,7 @@ export class ProductService {
         // 商品种类
         httpParams = httpParams.append('category', params.category);
 
-        return this.httpClient.get<Product[]>('/products', {params: httpParams});
+        return this.httpClient.get<Product[]>('/api/products', {params: httpParams});
     }
 
     // 根据商品ID查询商品
@@ -84,7 +84,7 @@ export class ProductService {
       let httpParams = new HttpParams();
       httpParams = httpParams.append('id', productId);
       
-      return this.httpClient.get<Product>('/productbyid', {params: httpParams});
+      return this.httpClient.get<Product>('/api/productbyid', {params: httpParams});
     }
 
     // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
