@@ -7,7 +7,7 @@
           <p class="card-text" *ngIf="product">
             <span><auction-stars [rating]="product.rating"></auction-stars></span>
           </p>
-          <p><button class="btn btn-danger" (click)="toggletWatchProduct()">{{isWatching? 'Stop watch' : 'Watch'}}</button></p>
+          <p><button class="btn btn-danger" (click)="toggletWatchProduct()">{{isWatching? '取消' : '订阅'}}</button><label>&nbsp;&nbsp;当前最新出价： {{currentBid | currency}}</label></p>
           <p class="card-text" *ngIf="reviews">
             Last Updated Date: {{reviews[reviews.length -1].timestamp | date: 'medium'}}
           </p>

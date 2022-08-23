@@ -57,31 +57,34 @@ wsServer.on('connection', ws => {
     let subscriptionRequest = JSON.parse(message.toString());
     subscribeToProductBids(ws, subscriptionRequest.productId);
   });
-
-  ws.send("XXXX");
 })
 
 // 每2秒钟，向订阅人发送最新的订阅信息
 setInterval(() => {
   // 更新最新的商品和出价的Map情报
   generateNewBids();
-  console.log(currentBids);
+  // TODO
+  // console.log(currentBids);
   broadcastNewBidsToSubscrbers();
 }, 2000);
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-const subscriptions = new Map<any, number[]>();
-function subscribeToProductBids(client: any, productId: number) {
+const subscriptions = new Map<any, string[]>();
+function subscribeToProductBids(client: any, productId: string) {
     let products = subscriptions.get(client) || [];
     subscriptions.set(client, [...products, productId]);
 }
 
 function broadcastNewBidsToSubscrbers(){
-  subscriptions.forEach((products: number[], ws: WebSocket) => {
+  subscriptions.forEach((products: string[], ws: WebSocket) => {
     if(ws.readyState === 1) {
       let newBids = products.map(pid => ({
         productId: pid,
         bid: currentBids.get(pid)
       }));
+      // console.log(newBids[0].bid);
+      // console.log(newBids[0].productId);
+      // console.log(JSON.stringify(currentBids));
+      // console.log(JSON.stringify(newBids));
       ws.send(JSON.stringify(newBids));
     } else {
       subscriptions.delete(ws);
@@ -93,17 +96,18 @@ function broadcastNewBidsToSubscrbers(){
 // Bid generator
 
 // Map<产品，最新出价>
-const currentBids = new Map<number, number>();
+// 重要，不知道什么原因，原先这里的Map<number, number>，productId定义为number时，取不到bid最新的出价，现在改成使用string作为key
+const currentBids = new Map<string, number>();
 // 产生新的报价
 function generateNewBids() {
   // 取得全部商品进行遍历
   getAllProducts().forEach(p => {
     // 如果出新的出价不在Map中，则使用商品的价格
-    const currentBid = currentBids.get(p.id) || p.price;
+    const currentBid = currentBids.get(p.id.toString()) || p.price;
     // 调用共通方法random（），计算出最新的出价，另外每次最高加价5元
     const newBid = random(currentBid, currentBid + 5);
     // 将最新的出价更新到Map中
-    currentBids.set(p.id, newBid);
+    currentBids.set(p.id.toString(), newBid);
   });
 }
 

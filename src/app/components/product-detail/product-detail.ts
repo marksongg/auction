@@ -1,11 +1,14 @@
 import { Component, OnDestroy } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
+import { Subscription } from "rxjs";
+import { BidService } from "src/app/services/bid-service";
 import { Product, Review, ProductService } from "src/app/services/product-service";
 
 @Component({
     selector: '',
     styleUrls: ['./product-detail.css'],
-    templateUrl: './product-detail.html'
+    templateUrl: './product-detail.html',
+    providers:[BidService]
 })
 export default class ProductDetailComponent implements OnDestroy{
     product: Product | undefined;
@@ -16,11 +19,18 @@ export default class ProductDetailComponent implements OnDestroy{
     newRating:number = 0;
     newComment:string = "";
 
+    // 订阅开关：点击按钮时会变更值（订阅：true, 取消订阅：false）
     isWatching: boolean= false;
+    // 最新的出价
+    currentBid: number = 0;
+    // 订阅相关类
+    private subscription: Subscription = new Subscription();
 
     // 这里使用DI依赖注入ProductService
     // 需要在ngModule处，使用providers，将ProductService加载进来
-    constructor(route: ActivatedRoute, productService: ProductService){
+    constructor(route: ActivatedRoute, 
+        productService: ProductService,
+        private bidService: BidService){
         this.productId = route.snapshot.params['prodId'];
         this.product = productService.getProductById(this.productId);
         this.reviews = productService.getReviewsForProduct(this.productId);
@@ -29,15 +39,22 @@ export default class ProductDetailComponent implements OnDestroy{
 
     toggletWatchProduct(){
         if(this.isWatching){
+            this.subscription.unsubscribe();
             this.isWatching = false;
         } else {
             this.isWatching = true;
+            this.subscription = this.bidService.watchProduct(this.productId).subscribe(
+                // 重要这里的JSON.parse一定要加上去，不然数据有问题
+                data => this.currentBid = JSON.parse(data).find((p: any) => p.productId === this.productId).bid
+                );
         }
     }
 
     // 需要实现implements OnDestroy，当画面关闭时，关闭订阅
     ngOnDestroy(): void {
-        // TODO
+        if(this.subscription){
+            this.subscription.unsubscribe();
+        }
     }
 
 
