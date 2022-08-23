@@ -1,5 +1,5 @@
 import * as express from "express";
-import { Product, getProducts, getAllProducts } from "./model";
+import { Product, getProducts, getAllProducts, getProductById } from "./model";
 // 引入webSocket类，另外使用了一个别名WsServer
 import { Server as WsServer } from "ws";
 import { race } from "rxjs";
@@ -12,7 +12,7 @@ const app = express();
 
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-// 1：取得全部商品服务
+// 1：根据查询条件，取得商品
 app.get('/products', (req, res) => 
   {
     // L打印query查询条件
@@ -22,10 +22,12 @@ app.get('/products', (req, res) =>
   }
 );
 
-// // 根据ID查询数据（TODO）
-// function getProductById(productId: number): Product {
-//     return products.find(p => p.id === productId);
-// }
+// 根据ID，查询商品
+// 2022/08/23 重要，不要忘了加上[/]，不然找不到服务
+app.get('/productbyid', (req, res) => {
+   console.log("productbyid" + JSON.stringify(req.query));
+   res.json(getProductById(req.query));
+});
 
 // 2：主页服务
 // app.get('/', (req, res) => res.send('The URL for products is http://localhost:8000/products'));
@@ -63,8 +65,6 @@ wsServer.on('connection', ws => {
 setInterval(() => {
   // 更新最新的商品和出价的Map情报
   generateNewBids();
-  // TODO
-  // console.log(currentBids);
   broadcastNewBidsToSubscrbers();
 }, 2000);
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

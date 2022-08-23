@@ -74,7 +74,8 @@ export default class HomeComponent {
 
         // 增加一个订阅
         this.productService.searchEvent.subscribe(params => {
-          this.productService.search(params).subscribe(data => {
+          // 根据HttpClient查询后端note服务器的所有商品数据
+          this.productService.searchProducts(params).subscribe(data => {
             if(data){
               this.products = data;
 
@@ -87,9 +88,6 @@ export default class HomeComponent {
             } 
           });
         });
-
-        
-
     }
 
     // 关闭模态画面

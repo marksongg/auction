@@ -52,8 +52,10 @@ export class ProductService {
 
     }
 
+    // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     // 通过HTTP访问
-    search(params: ProductSearchParams): Observable<Product[]>{
+    // 根据条件查询商品
+    searchProducts(params: ProductSearchParams): Observable<Product[]>{
         // HttpParams对象设置查询条件使用
         let httpParams = new HttpParams();
         // Begin assigning parameters
@@ -77,6 +79,16 @@ export class ProductService {
         return this.httpClient.get<Product[]>('/products', {params: httpParams});
     }
 
+    // 根据商品ID查询商品
+    searchProductById(productId: number): Observable<Product>{
+      let httpParams = new HttpParams();
+      httpParams = httpParams.append('id', productId);
+      
+      return this.httpClient.get<Product>('/productbyid', {params: httpParams});
+    }
+
+    // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    // 从前台的数据中取得
     // 生成商品对象数组
     getProducts(): Array<Product> {
         let tempProducts: Array<Product> = products.map(p => new Product(p.id, p.title, p.price, p.rating, p.description, p.categories, p.img));

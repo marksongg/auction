@@ -16,17 +16,19 @@ var ws_1 = require("ws");
 // Http请求，websocket服务都在这个类里面
 var app = express();
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-// 1：取得全部商品服务
+// 1：根据查询条件，取得商品
 app.get('/products', function (req, res) {
     // L打印query查询条件
     console.log("req.query : " + JSON.stringify(req.query));
     // 重要：这里固定返回的是JSON格式的对象 
     res.json((0, model_1.getProducts)(req.query));
 });
-// // 根据ID查询数据（TODO）
-// function getProductById(productId: number): Product {
-//     return products.find(p => p.id === productId);
-// }
+// 根据ID，查询商品
+// 2022/08/23 重要，不要忘了加上[/]，不然找不到服务
+app.get('/productbyid', function (req, res) {
+    console.log("productbyid" + JSON.stringify(req.query));
+    res.json((0, model_1.getProductById)(req.query));
+});
 // 2：主页服务
 // app.get('/', (req, res) => res.send('The URL for products is http://localhost:8000/products'));
 // 一定别忘加上斜杠[\]
@@ -57,8 +59,6 @@ wsServer.on('connection', function (ws) {
 setInterval(function () {
     // 更新最新的商品和出价的Map情报
     generateNewBids();
-    // TODO
-    // console.log(currentBids);
     broadcastNewBidsToSubscrbers();
 }, 2000);
 // ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

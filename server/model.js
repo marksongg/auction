@@ -1,6 +1,6 @@
 "use strict";
 exports.__esModule = true;
-exports.getAllProducts = exports.getProducts = exports.Product = void 0;
+exports.getAllProducts = exports.getProductById = exports.getProducts = exports.Product = void 0;
 var Product = /** @class */ (function () {
     function Product(id, title, price, rating, description, categories, img) {
         this.id = id;
@@ -33,6 +33,13 @@ function getProducts(params) {
     return result;
 }
 exports.getProducts = getProducts;
+function getProductById(params) {
+    if (params === void 0) { params = {}; }
+    var tempProduct = {};
+    tempProduct = products.find(function (p) { return p.id === parseInt(params.id); });
+    return new Product(tempProduct.id, tempProduct.title, tempProduct.price, tempProduct.rating, tempProduct.description, tempProduct.categories, tempProduct.img);
+}
+exports.getProductById = getProductById;
 // (HttpClient.get请求)根据查询条件查询商品信息
 function getAllProducts() {
     return products;

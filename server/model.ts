@@ -30,6 +30,13 @@ export function getProducts(params = <any>{}): Product[] {
     return result;
 }
 
+export function getProductById(params = <any>{}): Product {
+    let tempProduct: any = {};
+    tempProduct = products.find(p => p.id === parseInt(params.id));
+    return new Product(tempProduct.id, tempProduct.title, tempProduct.price, tempProduct.rating, tempProduct.description,
+        tempProduct.categories, tempProduct.img);
+}
+
 // (HttpClient.get请求)根据查询条件查询商品信息
 export function getAllProducts(): Product[] {
     return products;

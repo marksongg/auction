@@ -32,7 +32,13 @@ export default class ProductDetailComponent implements OnDestroy{
         productService: ProductService,
         private bidService: BidService){
         this.productId = route.snapshot.params['prodId'];
-        this.product = productService.getProductById(this.productId);
+        // 1. 查询前端的商品数据
+        // this.product = productService.getProductById(this.productId);
+
+        // 2. 根据HttpClient查询node服务器的商品数据
+        productService.searchProductById(this.productId).subscribe(data => 
+            this.product = data
+        );
         this.reviews = productService.getReviewsForProduct(this.productId);
         console.log(this.reviews);
     }
