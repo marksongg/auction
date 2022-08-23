@@ -18,6 +18,7 @@ import { FilterPipe } from './components/pipes/filter-pipe';
 import { ReactiveFormsModule } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { WebSocketService } from './services/websocket-service';
 
 
 @NgModule({
@@ -44,7 +45,7 @@ import { HttpClientModule } from '@angular/common/http';
     // ★重要，要导入ReactiveFormsModule，不然FormContrl类不识别
     ReactiveFormsModule
   ],
-  providers: [ProductService],
+  providers: [ProductService, WebSocketService],
   bootstrap: [
     AppComponent, 
     ApplicationComponent, // ★重要，这里必须要追加，否则*ngfor等命令不可以使用

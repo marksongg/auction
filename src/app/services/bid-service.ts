@@ -4,34 +4,16 @@ import { WebSocketService } from "./websocket-service";
 
 @Injectable()
 export class BidService {
-    constructor(){
+    constructor(private ws: WebSocketService){
         
     }
 
-     private ws!: WebSocket;
-
-    createObservableSocket(url: string, openSubscriber: Subscriber<any>): Observable<any>{
-        this.ws = new WebSocket(url);
-        return new Observable(observer => {
-            this.ws.onmessage = event => observer.next(event.data);
-            this.ws.onerror = event => observer.error(event);
-            this.ws.onclose = event => observer.complete();
-            this.ws.onopen = event => {
-                openSubscriber.next();
-                openSubscriber.complete();
-            }
-
-            return () => this.ws.close();
-        });
-    }
-
-    send(message: any) {
-        this.ws.send(JSON.stringify(message));
-    }
+    private url: string = 'ws://localhost:8085';
 
     watchProduct(productId: number): Observable<any>{
-        let openSubscriber = Subscriber.create(() => this.send({productId: productId}));
+        let openSubscriber = Subscriber.create(() => this.ws.send({productId: productId}));
 
-        return this.createObservableSocket('ws://localhost:8085', openSubscriber)
+        // 'ws://localhost:8085'
+        return this.ws.createObservableSocket(this.url, openSubscriber)
     }
 }
