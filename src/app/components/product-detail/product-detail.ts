@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import { Component, OnDestroy } from "@angular/core";
 import { ActivatedRoute } from "@angular/router";
 import { Product, Review, ProductService } from "src/app/services/product-service";
 
@@ -7,7 +7,7 @@ import { Product, Review, ProductService } from "src/app/services/product-servic
     styleUrls: ['./product-detail.css'],
     templateUrl: './product-detail.html'
 })
-export default class ProductDetailComponent{
+export default class ProductDetailComponent implements OnDestroy{
     product: Product | undefined;
     productId: number;
     reviews: Review[];
@@ -15,6 +15,8 @@ export default class ProductDetailComponent{
     isReviewHidden: boolean = true;
     newRating:number = 0;
     newComment:string = "";
+
+    isWatching: boolean= false;
 
     // 这里使用DI依赖注入ProductService
     // 需要在ngModule处，使用providers，将ProductService加载进来
@@ -24,6 +26,20 @@ export default class ProductDetailComponent{
         this.reviews = productService.getReviewsForProduct(this.productId);
         console.log(this.reviews);
     }
+
+    toggletWatchProduct(){
+        if(this.isWatching){
+            this.isWatching = false;
+        } else {
+            this.isWatching = true;
+        }
+    }
+
+    // 需要实现implements OnDestroy，当画面关闭时，关闭订阅
+    ngOnDestroy(): void {
+        // TODO
+    }
+
 
     addReview(){
         // 最新的评价对象新规作成

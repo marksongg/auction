@@ -36,6 +36,16 @@ export interface ProductSearchParams {
 // 重要：如果引入了HttpClient，这个@Injectable()一定要引入进来
 @Injectable()
 export class ProductService {
+    // ①重要：EventEmitter定义一个通知事件
+    // ②SearchComponent.ts: 发出通知
+    // 　调用・this.productService.searchEvent.emit(this.formModel.value);
+    //   传参数：this.formModel.value
+    // ③HomeComponent.ts
+    //   在构造函数中，订阅
+    //   增加一个订阅
+    // 　　　　　this.productService.searchEvent.subscribe(params => {
+    //             .....  
+    //          });
     searchEvent: EventEmitter<any> = new EventEmitter();
 
     constructor(private httpClient: HttpClient){
