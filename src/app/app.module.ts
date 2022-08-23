@@ -19,6 +19,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { WebSocketService } from './services/websocket-service';
+import ReferenceComponent from './components/reference/reference';
 
 
 @NgModule({
@@ -33,6 +34,7 @@ import { WebSocketService } from './services/websocket-service';
     StarsComponent,
     HomeComponent,
     ProductDetailComponent,
+    ReferenceComponent, //備考コンポーネント
     FilterPipe // ★重要，导入商品过滤管道Pipe
   ],
   imports: [
