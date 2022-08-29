@@ -46,4 +46,6 @@
   ・npm install ws --save
   ・npm install @types/ws --save-dev
   
-  
+# 2022/08/25 安装rxjs
+  ・npm install rxjs --save
+
